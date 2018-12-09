@@ -560,6 +560,71 @@ cr.plugins_.c2canvas = function(runtime)
 		this.ctx.lineTo(x, y);
 	};
 	
+	acts.arrowTo = function (x1, y1, x2, y2, headlen)
+	{
+		//variables to be used when creating the arrow
+		var ctx = this.ctx;
+
+		var angle = Math.atan2(y2-y1,x2-x1);
+
+		//starting path of the arrow from the start square to the end square and drawing the stroke
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+
+		//starting a new path from the head of the arrow to one of the sides of the point
+		ctx.moveTo(x2, y2);
+		ctx.lineTo(x2-headlen*Math.cos(angle-Math.PI/7),y2-headlen*Math.sin(angle-Math.PI/7));
+
+		//path from the side point of the arrow, to the other side point
+		ctx.lineTo(x2-headlen*Math.cos(angle+Math.PI/7),y2-headlen*Math.sin(angle+Math.PI/7));
+
+		//path from the side point back to the tip of the arrow, and then again to the opposite side point
+		ctx.lineTo(x2, y2);
+		ctx.lineTo(x2-headlen*Math.cos(angle-Math.PI/7),y2-headlen*Math.sin(angle-Math.PI/7));
+		
+		ctx.moveTo(x2, y2);
+	};
+	
+	acts.tTo = function (x1, y1, x2, y2, headlen)
+	{
+		//variables to be used when creating the arrow
+		var ctx = this.ctx;
+
+		var angle = Math.atan2(y2-y1,x2-x1);
+
+		//starting path of the arrow from the start square to the end square and drawing the stroke
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+
+		ctx.moveTo(x2, y2);
+		ctx.lineTo(x2-headlen*Math.cos(angle-Math.PI/2),y2-headlen*Math.sin(angle-Math.PI/2));
+		
+		ctx.moveTo(x2, y2);
+		ctx.lineTo(x2+headlen*Math.cos(angle-Math.PI/2),y2-headlen*Math.sin(angle+Math.PI/2));
+
+		ctx.moveTo(x2, y2);
+	};
+	
+	acts.ellipseTo = function (x1, y1, x2, y2, width)
+	{
+		var ctx = this.ctx;
+
+		var xd = x2 - x1;
+		var yd = y2 - y1;
+		var distance = Math.sqrt(xd * xd + yd * yd)
+		var angle = Math.atan2(y2-y1,x2-x1);
+		
+		var xradius = distance/2;
+		var yradius = width;
+		var xoffset = Math.cos(angle) * xradius;
+		var yoffset = Math.sin(angle) * xradius;
+  
+		// TODO: this is getting minified...
+		ctx['ellipse'](x1 + xoffset, y1 + yoffset, xradius , yradius, angle + Math.PI, 0, 2 * Math.PI);
+
+		ctx.moveTo(x2, y2);
+	};
+	
 	acts.arc = function (x, y, radius, start_angle, end_angle, arc_direction)
 	{
 		this.ctx.arc(x, y, radius, cr.to_radians(start_angle), cr.to_radians(end_angle), arc_direction==1);

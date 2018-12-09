@@ -164,6 +164,27 @@ AddNumberParam("dash width", "Width of dash, in pixels", "5");
 AddNumberParam("space width", "Width of space between dashes, in pixels", "5");
 AddAction(23, 0, "Line Dash Setting", "Path", "Line dash width {0}, space width {1}", "Sets line dash settings.", "setLineDash");
 
+AddNumberParam("x1", "x start position on canvas", "0");
+AddNumberParam("y1", "y start position on canvas", "0");
+AddNumberParam("x2", "x end position on canvas", "0");
+AddNumberParam("y2", "y end position on canvas", "0");
+AddNumberParam("headlen", "length of arrow head.", "10");
+AddAction(24, 0, "Arrow To", "Path", "Arrow from ({0},{1}) to ({2},{3}) with head length {4}", "Arrow to.", "arrowTo");
+
+AddNumberParam("x1", "x start position on canvas", "0");
+AddNumberParam("y1", "y start position on canvas", "0");
+AddNumberParam("x2", "x end position on canvas", "0");
+AddNumberParam("y2", "y end position on canvas", "0");
+AddNumberParam("headlen", "length of T head.", "10");
+AddAction(25, 0, "T To", "Path", "T from ({0},{1}) to ({2},{3}) with head length {4}", "T to.", "tTo");
+
+AddNumberParam("x1", "x start position on canvas", "0");
+AddNumberParam("y1", "y start position on canvas", "0");
+AddNumberParam("x2", "x end position on canvas", "0");
+AddNumberParam("y2", "y end position on canvas", "0");
+AddNumberParam("width", "width of Ellipse.", "10");
+AddAction(26, 0, "Ellipse To", "Path", "Ellipse from ({0},{1}) to ({2},{3}) with width {4}", "Ellipse to.", "ellipseTo");
+
 // expressions
 
 AddNumberParam("x", "x position on canvas", "0");
